@@ -43,16 +43,16 @@ namespace Grafika_Projekat1
             {
                 WindowState = WindowState.Normal;
                 isFullscreen = false;
-                fullScreenButton.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F18C8E"));
-                fullScreenButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#305F72"));
+                fullScreenButton.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#D8737F"));
+                fullScreenButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#475C7A"));
                 fullScreenButtonIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen;
             }
             else
             {
                 WindowState = WindowState.Maximized;
                 isFullscreen = true;
-                fullScreenButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F18C8E"));
-                fullScreenButton.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#305F72"));
+                fullScreenButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#D8737F"));
+                fullScreenButton.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#475C7A"));
                 fullScreenButtonIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;
             }
         }

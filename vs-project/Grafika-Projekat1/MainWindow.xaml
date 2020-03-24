@@ -23,11 +23,12 @@
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="30" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
@@ -35,80 +36,70 @@
             </Grid.RowDefinitions>
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#F0B7A4" Offset="0" />
-                    <GradientStop Color="#F1D1B5" Offset="1" />
+                    <GradientStop Color="#685D79" Offset="0" />
+                    <GradientStop Color="#685D79" Offset="1" />
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <StackPanel VerticalAlignment="Bottom" Grid.Row="8" Margin="5, 15">
-                <Label  Foreground="#305F72" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">Slavko Lukić</Label>
-                <Label  Foreground="#305F72" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">pr129-2016</Label>
+            <StackPanel VerticalAlignment="Bottom" Grid.Row="9" Margin="5, 20">
+                <Label  Foreground="#FCBB6D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">Slavko Lukić</Label>
+                <Label  Foreground="#FCBB6D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">pr129-2016</Label>
             </StackPanel>
 
-            <Button Grid.Row="1" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Elipse
+            <DockPanel  Grid.Row="1"  Width="180" Height="38">
+                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Elipse</Label>
+                <local:ToggleButton HorizontalAlignment="Right" Width="57" />
+            </DockPanel>
+            <DockPanel Grid.Row="2"  Width="180" Height="38">
+                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Rectangle</Label>
+                <local:ToggleButton HorizontalAlignment="Right" Width="57" />
+            </DockPanel>
+
+            <DockPanel  Grid.Row="3"  Width="180" Height="38">
+                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Polygon</Label>
+                <local:ToggleButton HorizontalAlignment="Right"  Width="57" />
+            </DockPanel>
+            <DockPanel  Grid.Row="4"  Width="180" Height="38">
+                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Image</Label>
+                <local:ToggleButton HorizontalAlignment="Right"  Width="57" />
+            </DockPanel>
+
+            <Button Grid.Row="6" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Undo
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
+                        <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Grid.Row="2" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Rectangle
+            <Button Grid.Row="7" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Redo
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
+                        <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Grid.Row="3" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Polygon
+            <Button Grid.Row="8" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Clear
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="4" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Image
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="5" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Undo
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="6" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Redo
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Grid.Row="7" Width="170" Height="30"  Background="#568EA6 " FontSize="20" FontFamily="Consolas" Foreground="#F1D1B5"  BorderThickness="0">Clear
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9" />
+                        <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>
         </Grid>
 
-        <Grid x:Name="topBarGrid" Grid.ColumnSpan="2" Background="#305F72" MouseDown="TopBarGrid_MouseDown">
+        <Grid x:Name="topBarGrid" Grid.ColumnSpan="2" Background="#475C7A" MouseDown="TopBarGrid_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1339*" />
                 <ColumnDefinition Width="253*" />
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="5, 0">
-                <Button x:Name="minimizeButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#F18C8E" Width="35" Height="35" Click="MinimizeButton_Click">
+                <Button x:Name="minimizeButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#D8737F" Width="35" Height="35" Click="MinimizeButton_Click">
                     <materialDesign:PackIcon Kind="WindowMinimize" Height="32" Width="32" />
                 </Button>
-                <Button x:Name="fullScreenButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#F18C8E" Width="35" Height="35" Click="FullScreenButton_Click">
+                <Button x:Name="fullScreenButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#D8737F" Width="35" Height="35" Click="FullScreenButton_Click">
                     <materialDesign:PackIcon x:Name="fullScreenButtonIcon" Kind="Fullscreen" Height="32" Width="32" />
                 </Button>
-                <Button x:Name="exitButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#F18C8E" Width="35" Height="35" Click="ExitButton_Click">
+                <Button x:Name="exitButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#D8737F" Width="35" Height="35" Click="ExitButton_Click">
                     <materialDesign:PackIcon Kind="Power" Height="32" Width="32"></materialDesign:PackIcon>
                 </Button>
             </StackPanel>

@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Grafika_Projekat1.ToggleButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Grafika_Projekat1"
+             mc:Ignorable="d"
+             d:DesignHeight="450" Width="750">
+    <UserControl.Resources>
+        <Thickness x:Key="Thickness1">-39,0,0,0</Thickness>
+        <Thickness x:Key="Thickness2">0,0,-39,0</Thickness>
+    </UserControl.Resources>
+
+    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Left" Height="60" Margin="0" VerticalAlignment="Top" Width="100">
+            <Rectangle x:Name="bck" Fill="#FFA0A0A0" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="96" Margin="2,2,0,0" RadiusY="29" RadiusX="29" MouseLeftButtonDown="Bck_MouseLeftButtonDown" />
+            <Ellipse x:Name="dot" Fill="White" HorizontalAlignment="Center" Height="50"  VerticalAlignment="Center" Width="50" MouseLeftButtonDown="Dot_MouseLeftButtonDown" />
+        </Grid>
+    </Viewbox>
+</UserControl>
