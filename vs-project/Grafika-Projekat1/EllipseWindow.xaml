@@ -1,4 +1,4 @@
-﻿<Window x:Class="Grafika_Projekat1.ElipseWindow"
+﻿<Window x:Class="Grafika_Projekat1.EllipseWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="ElipseWindow" Height="400" Width="350">
+        Title="EllipseWindow" Height="400" Width="350">
 
     <Grid Background="WhiteSmoke" MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
@@ -85,7 +85,7 @@
         <xctk:ColorPicker BorderBrush="#475C7A" BorderThickness="2" Width="130" Height="40" Grid.Row="4" Grid.Column="2" Name="borderColorPicker">
         </xctk:ColorPicker>
 
-        <TextBox x:Name="borderThciknessTb" FontFamily="Consolas" FontSize="18" BorderBrush="#475C7A" BorderThickness="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="2" Width="130" Height="40" PreviewTextInput="NumberValidationTextBox">
+        <TextBox x:Name="borderThicknessTb" FontFamily="Consolas" FontSize="18" BorderBrush="#475C7A" BorderThickness="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="2" Width="130" Height="40" PreviewTextInput="NumberValidationTextBox">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="3" />

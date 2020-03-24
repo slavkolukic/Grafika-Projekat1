@@ -26,14 +26,18 @@ namespace Grafika_Projekat1
         private static List<Button> buttons = new List<Button>();
         private static List<PackIcon> icons = new List<PackIcon>();
 
+        private static Ellipse ellipseDesigner = null;
+
+        public static Ellipse EllipseDesigner { get => ellipseDesigner; set => ellipseDesigner = value; }
+
         public MainWindow()
         {
             InitializeComponent();
-            buttons.Add(elipseBtn);
+            buttons.Add(ellipseBtn);
             buttons.Add(rectangleBtn);
             buttons.Add(polygonBtn);
             buttons.Add(imageBtn);
-            icons.Add(elipseBtnIcon);
+            icons.Add(ellipseBtnIcon);
             icons.Add(rectangleBtnIcon);
             icons.Add(polygonBtnIcon);
             icons.Add(imageBtnIcon);
@@ -95,10 +99,10 @@ namespace Grafika_Projekat1
 
         private void ElipseBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (activeShape == "elipse")
+            if (activeShape == "ellipse")
                 activeShapeLbl.Content = "none";
             else
-                activeShapeLbl.Content = "elipse";
+                activeShapeLbl.Content = "ellipse";
 
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
@@ -139,11 +143,22 @@ namespace Grafika_Projekat1
 
         private void Cnvs_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Point p = Mouse.GetPosition(cnvs);
             switch (activeShape)
             {
-                case "elipse":
-                    ElipseWindow elipseWindow = new ElipseWindow();
+                case "ellipse":
+                    EllipseWindow elipseWindow = new EllipseWindow();
                     elipseWindow.ShowDialog();
+                    if (EllipseDesigner != null)
+                    {
+                        Canvas.SetLeft(MainWindow.EllipseDesigner, p.X);
+                        Canvas.SetTop(MainWindow.EllipseDesigner, p.Y);
+                        Ellipse ellipse = new Ellipse();
+                        ellipse = EllipseDesigner;
+                        EllipseDesigner = null;
+                        cnvs.Children.Add(ellipse);
+                    }
+
                     break;
             }
         }

@@ -47,9 +47,9 @@
             </StackPanel>
 
             <DockPanel  Grid.Row="1"  Width="170" Height="38">
-                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Elipse</Label>
-                <Button x:Name="elipseBtn" BorderBrush="LightGray" BorderThickness="3"  VerticalAlignment="Center" Background="Transparent" Width="35" Height="35" HorizontalAlignment="Right" Click="ElipseBtn_Click">
-                    <materialDesign:PackIcon x:Name="elipseBtnIcon" Foreground="LightGray" Kind="CheckBold" Height="25" Width="25"></materialDesign:PackIcon>
+                <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Ellipse</Label>
+                <Button x:Name="ellipseBtn" BorderBrush="LightGray" BorderThickness="3"  VerticalAlignment="Center" Background="Transparent" Width="35" Height="35" HorizontalAlignment="Right" Click="ElipseBtn_Click">
+                    <materialDesign:PackIcon x:Name="ellipseBtnIcon" Foreground="LightGray" Kind="CheckBold" Height="25" Width="25"></materialDesign:PackIcon>
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="6" />
@@ -94,7 +94,7 @@
 
             <DockPanel  VerticalAlignment="Top" Width="170" Height="38" Grid.Row="5">
                 <Label FontSize="14" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Selected shape:</Label>
-                <Label x:Name="activeShapeLbl" FontSize="14" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >None</Label>
+                <Label x:Name="activeShapeLbl" FontSize="14" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >none</Label>
             </DockPanel>
 
             <Button Grid.Row="6" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Undo
