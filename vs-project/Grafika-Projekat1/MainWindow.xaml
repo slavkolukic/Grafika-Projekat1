@@ -137,5 +137,7 @@
                 </Button>
             </StackPanel>
         </Grid>
+        <Canvas Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
+        </Canvas>
     </Grid>
 </Window>

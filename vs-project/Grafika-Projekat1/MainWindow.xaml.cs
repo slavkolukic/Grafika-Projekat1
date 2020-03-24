@@ -136,5 +136,16 @@ namespace Grafika_Projekat1
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
         }
+
+        private void Cnvs_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            switch (activeShape)
+            {
+                case "elipse":
+                    ElipseWindow elipseWindow = new ElipseWindow();
+                    elipseWindow.ShowDialog();
+                    break;
+            }
+        }
     }
 }
