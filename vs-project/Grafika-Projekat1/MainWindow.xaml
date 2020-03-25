@@ -11,6 +11,12 @@
         MinWidth="750"
         MinHeight="750"
         Title="MainWindow" Height="900" Width="1600">
+    <Window.Resources>
+        <ResourceDictionary>
+            <TextBlock x:Key="PencilCursor" Cursor="Resources/Cursors/pencil.cur" />
+            <TextBlock x:Key="PenCursor" Cursor="Resources/Cursors/pen.cur" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -145,7 +151,7 @@
             </StackPanel>
         </Grid>
 
-        <Canvas Cursor="Hand" Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
+        <Canvas  Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
         </Canvas>
     </Grid>
 </Window>

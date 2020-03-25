@@ -27,8 +27,10 @@ namespace Grafika_Projekat1
         private static List<PackIcon> icons = new List<PackIcon>();
 
         private static Ellipse ellipseDesigner = null;
+        private static Rectangle rectangleDesigner = null;
 
         public static Ellipse EllipseDesigner { get => ellipseDesigner; set => ellipseDesigner = value; }
+        public static Rectangle RectangleDesigner { get => rectangleDesigner; set => rectangleDesigner = value; }
 
         public MainWindow()
         {
@@ -41,6 +43,8 @@ namespace Grafika_Projekat1
             icons.Add(rectangleBtnIcon);
             icons.Add(polygonBtnIcon);
             icons.Add(imageBtnIcon);
+
+            cnvs.Cursor = ((TextBlock)this.Resources["PencilCursor"]).Cursor;
         }
 
         private void TopBarGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -176,8 +180,8 @@ namespace Grafika_Projekat1
                     elipseWindow.ShowDialog();
                     if (EllipseDesigner != null)
                     {
-                        Canvas.SetLeft(MainWindow.EllipseDesigner, p.X);
-                        Canvas.SetTop(MainWindow.EllipseDesigner, p.Y);
+                        Canvas.SetLeft(EllipseDesigner, p.X);
+                        Canvas.SetTop(EllipseDesigner, p.Y);
                         Ellipse ellipse = new Ellipse();
                         ellipse = EllipseDesigner;
                         EllipseDesigner = null;
@@ -186,7 +190,32 @@ namespace Grafika_Projekat1
                     }
 
                     break;
+
+                case "rectangle":
+                    RectangleDesigner = null;
+                    RectangleWindow rectangleWindow = new RectangleWindow();
+                    rectangleWindow.ShowDialog();
+                    if (RectangleDesigner != null)
+                    {
+                        Canvas.SetLeft(RectangleDesigner, p.X);
+                        Canvas.SetTop(RectangleDesigner, p.Y);
+                        Rectangle rectangle = new Rectangle();
+                        rectangle = RectangleDesigner;
+                        RectangleDesigner = null;
+                        rectangle.MouseLeftButtonDown += OnRectangleMouseLeftButtonDown;
+                        cnvs.Children.Add(rectangle);
+                    }
+
+                    break;
             }
+        }
+
+        private void OnRectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var rectangle = e.OriginalSource;
+            RectangleDesigner = (Rectangle)rectangle;
+            RectangleWindow rw = new RectangleWindow();
+            rw.ShowDialog();
         }
 
         private void OnEllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
