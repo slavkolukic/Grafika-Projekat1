@@ -97,7 +97,7 @@ namespace Grafika_Projekat1
             }
         }
 
-        private void ElipseBtn_Click(object sender, RoutedEventArgs e)
+        private void EllipseBtn_Click(object sender, RoutedEventArgs e)
         {
             if (activeShape == "ellipse")
                 activeShapeLbl.Content = "none";
@@ -147,6 +147,7 @@ namespace Grafika_Projekat1
             switch (activeShape)
             {
                 case "ellipse":
+                    EllipseDesigner = null;
                     EllipseWindow elipseWindow = new EllipseWindow();
                     elipseWindow.ShowDialog();
                     if (EllipseDesigner != null)
@@ -156,11 +157,20 @@ namespace Grafika_Projekat1
                         Ellipse ellipse = new Ellipse();
                         ellipse = EllipseDesigner;
                         EllipseDesigner = null;
+                        ellipse.MouseLeftButtonDown += OnEllipseMouseLeftButtonDown;
                         cnvs.Children.Add(ellipse);
                     }
 
                     break;
             }
+        }
+
+        private void OnEllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var ellipse = e.OriginalSource;
+            EllipseDesigner = (Ellipse)ellipse;
+            EllipseWindow ew = new EllipseWindow();
+            ew.ShowDialog();
         }
     }
 }

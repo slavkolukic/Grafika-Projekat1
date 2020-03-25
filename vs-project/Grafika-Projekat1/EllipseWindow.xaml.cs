@@ -23,6 +23,24 @@ namespace Grafika_Projekat1
         public EllipseWindow()
         {
             InitializeComponent();
+            if (MainWindow.EllipseDesigner != null)
+            {
+                radxTb.Text = (MainWindow.EllipseDesigner.Width / 2).ToString();
+                radyTb.Text = (MainWindow.EllipseDesigner.Height / 2).ToString();
+                borderThicknessTb.Text = MainWindow.EllipseDesigner.StrokeThickness.ToString();
+                borderColorPicker.SelectedColor = GetColorFromPicker(MainWindow.EllipseDesigner.Stroke);
+                fillColorPicker.SelectedColor = GetColorFromPicker(MainWindow.EllipseDesigner.Fill);
+            }
+        }
+
+        private Color GetColorFromPicker(Brush brush)
+        {
+            byte a = ((Color)brush.GetValue(SolidColorBrush.ColorProperty)).A;
+            byte g = ((Color)brush.GetValue(SolidColorBrush.ColorProperty)).G;
+            byte r = ((Color)brush.GetValue(SolidColorBrush.ColorProperty)).R;
+            byte b = ((Color)brush.GetValue(SolidColorBrush.ColorProperty)).B;
+
+            return Color.FromArgb(a, r, g, b);
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
@@ -50,12 +68,23 @@ namespace Grafika_Projekat1
                 return;
             }
 
-            MainWindow.EllipseDesigner = new Ellipse();
-            MainWindow.EllipseDesigner.Height = Int32.Parse(radyTb.Text) * 2;
-            MainWindow.EllipseDesigner.Width = Int32.Parse(radxTb.Text) * 2;
-            MainWindow.EllipseDesigner.Stroke = new SolidColorBrush((Color)borderColorPicker.SelectedColor);
-            MainWindow.EllipseDesigner.Fill = new SolidColorBrush((Color)fillColorPicker.SelectedColor);
-            MainWindow.EllipseDesigner.StrokeThickness = Int32.Parse(borderThicknessTb.Text);
+            if (MainWindow.EllipseDesigner == null)
+            {
+                MainWindow.EllipseDesigner = new Ellipse();
+                MainWindow.EllipseDesigner.Height = Int32.Parse(radyTb.Text) * 2;
+                MainWindow.EllipseDesigner.Width = Int32.Parse(radxTb.Text) * 2;
+                MainWindow.EllipseDesigner.Stroke = new SolidColorBrush((Color)borderColorPicker.SelectedColor);
+                MainWindow.EllipseDesigner.Fill = new SolidColorBrush((Color)fillColorPicker.SelectedColor);
+                MainWindow.EllipseDesigner.StrokeThickness = Int32.Parse(borderThicknessTb.Text);
+            }
+            else
+            {
+                MainWindow.EllipseDesigner.Height = Int32.Parse(radyTb.Text) * 2;
+                MainWindow.EllipseDesigner.Width = Int32.Parse(radxTb.Text) * 2;
+                MainWindow.EllipseDesigner.Stroke = new SolidColorBrush((Color)borderColorPicker.SelectedColor);
+                MainWindow.EllipseDesigner.Fill = new SolidColorBrush((Color)fillColorPicker.SelectedColor);
+                MainWindow.EllipseDesigner.StrokeThickness = Int32.Parse(borderThicknessTb.Text);
+            }
 
             this.Close();
         }

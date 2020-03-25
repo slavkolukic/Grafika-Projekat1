@@ -48,7 +48,7 @@
 
             <DockPanel  Grid.Row="1"  Width="170" Height="38">
                 <Label FontSize="22" FontFamily="Consolas" Foreground="#FCBB6D">Ellipse</Label>
-                <Button x:Name="ellipseBtn" BorderBrush="LightGray" BorderThickness="3"  VerticalAlignment="Center" Background="Transparent" Width="35" Height="35" HorizontalAlignment="Right" Click="ElipseBtn_Click">
+                <Button x:Name="ellipseBtn" BorderBrush="LightGray" BorderThickness="3"  VerticalAlignment="Center" Background="Transparent" Width="35" Height="35" HorizontalAlignment="Right" Click="EllipseBtn_Click">
                     <materialDesign:PackIcon x:Name="ellipseBtnIcon" Foreground="LightGray" Kind="CheckBold" Height="25" Width="25"></materialDesign:PackIcon>
                     <Button.Resources>
                         <Style TargetType="Border">
