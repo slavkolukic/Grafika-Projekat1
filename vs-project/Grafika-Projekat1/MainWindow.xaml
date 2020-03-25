@@ -23,15 +23,17 @@
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.Background>
@@ -41,7 +43,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <StackPanel VerticalAlignment="Bottom" Grid.Row="9" Margin="5, 20">
+            <StackPanel VerticalAlignment="Bottom" Grid.Row="11" Margin="5, 20">
                 <Label  Foreground="#FCBB6D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">Slavko Lukić</Label>
                 <Label  Foreground="#FCBB6D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" FontFamily="Comic Sans MS">pr129-2016</Label>
             </StackPanel>
@@ -92,11 +94,6 @@
                 </Button>
             </DockPanel>
 
-            <DockPanel  VerticalAlignment="Top" Width="170" Height="38" Grid.Row="5">
-                <Label FontSize="14" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Selected shape:</Label>
-                <Label x:Name="activeShapeLbl" FontSize="14" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >none</Label>
-            </DockPanel>
-
             <Button Grid.Row="6" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Undo
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -118,6 +115,16 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            <StackPanel Grid.Row="10">
+                <DockPanel VerticalAlignment="Top"  Width="170" Height="30">
+                    <Label FontSize="14" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Selected shape:</Label>
+                    <Label x:Name="activeShapeLbl" FontSize="14" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >none</Label>
+                </DockPanel>
+                <DockPanel VerticalAlignment="Top"  Width="160">
+                    <TextBlock x:Name="usageTb" TextWrapping="Wrap" FontSize="14" FontWeight="Bold" FontFamily="Calibri" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="LightGray">
+                    </TextBlock>
+                </DockPanel>
+            </StackPanel>
         </Grid>
 
         <Grid x:Name="topBarGrid" Grid.ColumnSpan="2" Background="#475C7A" MouseDown="TopBarGrid_MouseDown">
@@ -137,7 +144,8 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Canvas Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
+
+        <Canvas Cursor="Hand" Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
         </Canvas>
     </Grid>
 </Window>

@@ -100,9 +100,15 @@ namespace Grafika_Projekat1
         private void EllipseBtn_Click(object sender, RoutedEventArgs e)
         {
             if (activeShape == "ellipse")
+            {
                 activeShapeLbl.Content = "none";
+                usageTb.Text = "";
+            }
             else
+            {
                 activeShapeLbl.Content = "ellipse";
+                usageTb.Text = "Right click on canvas to create new ellipse. Left click on existing ellipse to edit.";
+            }
 
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
@@ -111,9 +117,15 @@ namespace Grafika_Projekat1
         private void RectangleBtn_Click(object sender, RoutedEventArgs e)
         {
             if (activeShape == "rectangle")
+            {
                 activeShapeLbl.Content = "none";
+                usageTb.Text = "";
+            }
             else
+            {
                 activeShapeLbl.Content = "rectangle";
+                usageTb.Text = "Right click on canvas to create new rectangle. Left click on existing rectangle to edit.";
+            }
 
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
@@ -122,9 +134,15 @@ namespace Grafika_Projekat1
         private void PolygonBtn_Click(object sender, RoutedEventArgs e)
         {
             if (activeShape == "polygon")
+            {
                 activeShapeLbl.Content = "none";
+                usageTb.Text = "";
+            }
             else
+            {
                 activeShapeLbl.Content = "polygon";
+                usageTb.Text = "Right click on canvas to choose vertexes and left click on canvas to create polygon. Left click on existing polygon to edit.";
+            }
 
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
@@ -133,9 +151,15 @@ namespace Grafika_Projekat1
         private void ImageBtn_Click(object sender, RoutedEventArgs e)
         {
             if (activeShape == "image")
+            {
                 activeShapeLbl.Content = "none";
+                usageTb.Text = "";
+            }
             else
+            {
                 activeShapeLbl.Content = "image";
+                usageTb.Text = "Right click on canvas to choose image from hard drive. Left click on existing image to replace it.";
+            }
 
             activeShape = activeShapeLbl.Content.ToString();
             TurnOffButtons();
