@@ -84,7 +84,7 @@ namespace Grafika_Projekat1
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }

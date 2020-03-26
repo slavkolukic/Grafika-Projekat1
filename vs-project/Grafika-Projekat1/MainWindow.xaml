@@ -38,7 +38,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="15" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -123,20 +123,24 @@
             </Button>
             <StackPanel Grid.Row="10">
                 <DockPanel VerticalAlignment="Top"  Width="170" Height="30">
-                    <Label FontSize="14" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Selected shape:</Label>
-                    <Label x:Name="activeShapeLbl" FontSize="14" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >none</Label>
+                    <Label FontSize="16" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Shape:</Label>
+                    <Label x:Name="activeShapeLbl" FontSize="16" FontWeight="Bold" Foreground="#D8737F" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" >none</Label>
                 </DockPanel>
                 <DockPanel VerticalAlignment="Top"  Width="160">
-                    <TextBlock x:Name="usageTb" TextWrapping="Wrap" FontSize="14" FontWeight="Bold" FontFamily="Calibri" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="LightGray">
+                    <TextBlock x:Name="usageTb" TextWrapping="Wrap" FontSize="16" FontWeight="Bold" FontFamily="Calibri" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="LightGray">
                     </TextBlock>
+                </DockPanel>
+                <DockPanel VerticalAlignment="Top"  Width="170" Height="30">
+                    <Label Visibility="Hidden" x:Name="vertexesSelectedLbl" FontSize="16" FontWeight="Bold" FontFamily="Calibri" Foreground="LightGray" HorizontalAlignment="Left" VerticalAlignment="Top">Vertexes selected:</Label>
+                    <Label Visibility="Hidden" Content="{Binding Path=PolyPoints.Count, Mode=OneWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" x:Name="vertexesLbl" FontSize="16" FontWeight="Bold" Foreground="LightGray" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" ></Label>
                 </DockPanel>
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="topBarGrid" Grid.ColumnSpan="2" Background="#475C7A" MouseDown="TopBarGrid_MouseDown">
+        <Grid x:Name="topBarGrid" Grid.ColumnSpan="2" Background="#475C7A" MouseLeftButtonDown="TopBarGrid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1339*" />
-                <ColumnDefinition Width="253*" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="5, 0">
                 <Button x:Name="minimizeButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#D8737F" Width="35" Height="35" Click="MinimizeButton_Click">
@@ -151,7 +155,7 @@
             </StackPanel>
         </Grid>
 
-        <Canvas  Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown">
+        <Canvas  Background="GhostWhite" x:Name="cnvs" Grid.Column="1" Grid.Row="1" MouseRightButtonDown="Cnvs_MouseRightButtonDown" MouseLeftButtonDown="Cnvs_MouseLeftButtonDown">
         </Canvas>
     </Grid>
 </Window>

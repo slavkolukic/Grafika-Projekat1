@@ -1,7 +1,10 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,15 +28,19 @@ namespace Grafika_Projekat1
         private static string activeShape = "none";
         private static List<Button> buttons = new List<Button>();
         private static List<PackIcon> icons = new List<PackIcon>();
+        private static ObservableCollection<Point> polyPoints = new ObservableCollection<Point>();
 
         private static Ellipse ellipseDesigner = null;
         private static Rectangle rectangleDesigner = null;
-
+        private static Polygon polygonDesigner = null;
         public static Ellipse EllipseDesigner { get => ellipseDesigner; set => ellipseDesigner = value; }
         public static Rectangle RectangleDesigner { get => rectangleDesigner; set => rectangleDesigner = value; }
+        public static Polygon PolygonDesigner { get => polygonDesigner; set => polygonDesigner = value; }
+        public static ObservableCollection<Point> PolyPoints { get => polyPoints; set => polyPoints = value; }
 
         public MainWindow()
         {
+            DataContext = this;
             InitializeComponent();
             buttons.Add(ellipseBtn);
             buttons.Add(rectangleBtn);
@@ -45,9 +52,18 @@ namespace Grafika_Projekat1
             icons.Add(imageBtnIcon);
 
             cnvs.Cursor = ((TextBlock)this.Resources["PencilCursor"]).Cursor;
+
+            var dp = DependencyPropertyDescriptor.FromProperty(Label.ContentProperty, typeof(Label));
+            dp.AddValueChanged(vertexesLbl, (sender, args) =>
+            {
+                if (polyPoints.Count >= 3)
+                    vertexesLbl.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#D8737F"));
+                else
+                    vertexesLbl.Foreground = new SolidColorBrush(Colors.LightGray);
+            });
         }
 
-        private void TopBarGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TopBarGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
@@ -103,15 +119,23 @@ namespace Grafika_Projekat1
 
         private void EllipseBtn_Click(object sender, RoutedEventArgs e)
         {
+            polyPoints.Clear();
+
             if (activeShape == "ellipse")
             {
                 activeShapeLbl.Content = "none";
                 usageTb.Text = "";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
             else
             {
                 activeShapeLbl.Content = "ellipse";
                 usageTb.Text = "Right click on canvas to create new ellipse. Left click on existing ellipse to edit.";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
 
             activeShape = activeShapeLbl.Content.ToString();
@@ -120,15 +144,23 @@ namespace Grafika_Projekat1
 
         private void RectangleBtn_Click(object sender, RoutedEventArgs e)
         {
+            polyPoints.Clear();
+
             if (activeShape == "rectangle")
             {
                 activeShapeLbl.Content = "none";
                 usageTb.Text = "";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
             else
             {
                 activeShapeLbl.Content = "rectangle";
                 usageTb.Text = "Right click on canvas to create new rectangle. Left click on existing rectangle to edit.";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
 
             activeShape = activeShapeLbl.Content.ToString();
@@ -139,13 +171,20 @@ namespace Grafika_Projekat1
         {
             if (activeShape == "polygon")
             {
+                polyPoints.Clear();
                 activeShapeLbl.Content = "none";
                 usageTb.Text = "";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
             else
             {
                 activeShapeLbl.Content = "polygon";
-                usageTb.Text = "Right click on canvas to choose vertexes and left click on canvas to create polygon. Left click on existing polygon to edit.";
+                usageTb.Text = "Right click on canvas to choose at least 3 vertexes and left click on canvas to create polygon. Left click on existing polygon to edit.";
+
+                vertexesLbl.Visibility = Visibility.Visible;
+                vertexesSelectedLbl.Visibility = Visibility.Visible;
             }
 
             activeShape = activeShapeLbl.Content.ToString();
@@ -154,15 +193,23 @@ namespace Grafika_Projekat1
 
         private void ImageBtn_Click(object sender, RoutedEventArgs e)
         {
+            polyPoints.Clear();
+
             if (activeShape == "image")
             {
                 activeShapeLbl.Content = "none";
                 usageTb.Text = "";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
             else
             {
                 activeShapeLbl.Content = "image";
                 usageTb.Text = "Right click on canvas to choose image from hard drive. Left click on existing image to replace it.";
+
+                vertexesLbl.Visibility = Visibility.Hidden;
+                vertexesSelectedLbl.Visibility = Visibility.Hidden;
             }
 
             activeShape = activeShapeLbl.Content.ToString();
@@ -171,10 +218,11 @@ namespace Grafika_Projekat1
 
         private void Cnvs_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point p = Mouse.GetPosition(cnvs);
+            Point p = new Point();
             switch (activeShape)
             {
                 case "ellipse":
+                    p = Mouse.GetPosition(cnvs);
                     EllipseDesigner = null;
                     EllipseWindow elipseWindow = new EllipseWindow();
                     elipseWindow.ShowDialog();
@@ -192,6 +240,7 @@ namespace Grafika_Projekat1
                     break;
 
                 case "rectangle":
+                    p = Mouse.GetPosition(cnvs);
                     RectangleDesigner = null;
                     RectangleWindow rectangleWindow = new RectangleWindow();
                     rectangleWindow.ShowDialog();
@@ -207,11 +256,22 @@ namespace Grafika_Projekat1
                     }
 
                     break;
+
+                case "polygon":
+                    if (activeShape == "polygon")
+                    {
+                        polyPoints.Add(Mouse.GetPosition(cnvs));
+                    }
+
+                    break;
             }
         }
 
         private void OnRectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (activeShape == "polygon" && polyPoints.Count > 3)
+                return;
+
             var rectangle = e.OriginalSource;
             RectangleDesigner = (Rectangle)rectangle;
             RectangleWindow rw = new RectangleWindow();
@@ -220,10 +280,55 @@ namespace Grafika_Projekat1
 
         private void OnEllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (activeShape == "polygon" && polyPoints.Count > 3)
+                return;
+
             var ellipse = e.OriginalSource;
             EllipseDesigner = (Ellipse)ellipse;
             EllipseWindow ew = new EllipseWindow();
             ew.ShowDialog();
+        }
+
+        private void Cnvs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (activeShape == "polygon")
+            {
+                if (polyPoints.Count < 3)
+                {
+                    polyPoints.Clear();
+                    return;
+                }
+
+                PolygonDesigner = null;
+                PolygonWindow polygonWindow = new PolygonWindow();
+                polygonWindow.ShowDialog();
+                if (PolygonDesigner != null)
+                {
+                    Polygon poly = new Polygon();
+                    foreach (var point in polyPoints)
+                    {
+                        poly.Points.Add(point);
+                    }
+                    poly.Fill = PolygonDesigner.Fill;
+                    poly.Stroke = PolygonDesigner.Stroke;
+                    poly.StrokeThickness = PolygonDesigner.StrokeThickness;
+                    PolygonDesigner = null;
+                    poly.MouseLeftButtonDown += OnPolygonMouseLeftButtonDown;
+                    cnvs.Children.Add(poly);
+                }
+                polyPoints.Clear();
+            }
+        }
+
+        private void OnPolygonMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (activeShape == "polygon" && polyPoints.Count >= 3)
+                return;
+
+            var polygon = e.OriginalSource;
+            PolygonDesigner = (Polygon)polygon;
+            PolygonWindow pw = new PolygonWindow();
+            pw.ShowDialog();
         }
     }
 }
