@@ -33,10 +33,13 @@ namespace Grafika_Projekat1
         private static Ellipse ellipseDesigner = null;
         private static Rectangle rectangleDesigner = null;
         private static Polygon polygonDesigner = null;
+        private static Image imageDesigner = null;
+
         public static Ellipse EllipseDesigner { get => ellipseDesigner; set => ellipseDesigner = value; }
         public static Rectangle RectangleDesigner { get => rectangleDesigner; set => rectangleDesigner = value; }
         public static Polygon PolygonDesigner { get => polygonDesigner; set => polygonDesigner = value; }
         public static ObservableCollection<Point> PolyPoints { get => polyPoints; set => polyPoints = value; }
+        public static Image ImageDesigner { get => imageDesigner; set => imageDesigner = value; }
 
         public MainWindow()
         {
@@ -236,7 +239,6 @@ namespace Grafika_Projekat1
                         ellipse.MouseLeftButtonDown += OnEllipseMouseLeftButtonDown;
                         cnvs.Children.Add(ellipse);
                     }
-
                     break;
 
                 case "rectangle":
@@ -254,7 +256,6 @@ namespace Grafika_Projekat1
                         rectangle.MouseLeftButtonDown += OnRectangleMouseLeftButtonDown;
                         cnvs.Children.Add(rectangle);
                     }
-
                     break;
 
                 case "polygon":
@@ -262,9 +263,36 @@ namespace Grafika_Projekat1
                     {
                         polyPoints.Add(Mouse.GetPosition(cnvs));
                     }
+                    break;
 
+                case "image":
+                    p = Mouse.GetPosition(cnvs);
+                    ImageDesigner = null;
+                    ImageWindow imageWindow = new ImageWindow();
+                    imageWindow.ShowDialog();
+                    if (ImageDesigner != null)
+                    {
+                        Canvas.SetLeft(ImageDesigner, p.X);
+                        Canvas.SetTop(ImageDesigner, p.Y);
+                        Image image = new Image();
+                        image = ImageDesigner;
+                        ImageDesigner = null;
+                        image.MouseLeftButtonDown += OnImageMouseLeftButtonDown;
+                        cnvs.Children.Add(image);
+                    }
                     break;
             }
+        }
+
+        private void OnImageMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (activeShape == "polygon" && polyPoints.Count > 3)
+                return;
+
+            var image = e.OriginalSource;
+            ImageDesigner = (Image)image;
+            ImageWindow iw = new ImageWindow();
+            iw.ShowDialog();
         }
 
         private void OnRectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

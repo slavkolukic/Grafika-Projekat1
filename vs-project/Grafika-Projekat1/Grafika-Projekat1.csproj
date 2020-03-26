@@ -81,6 +81,9 @@
     <Compile Include="EllipseWindow.xaml.cs">
       <DependentUpon>EllipseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageWindow.xaml.cs">
+      <DependentUpon>ImageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PolygonWindow.xaml.cs">
       <DependentUpon>PolygonWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
     <Page Include="EllipseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
