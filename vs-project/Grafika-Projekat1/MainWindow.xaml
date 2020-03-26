@@ -100,21 +100,21 @@
                 </Button>
             </DockPanel>
 
-            <Button Grid.Row="6" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Undo
+            <Button x:Name="undoBtn" IsEnabled="False" Grid.Row="6" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0" Click="UndoBtn_Click">Undo
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Grid.Row="7" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Redo
+            <Button x:Name="redoBtn" IsEnabled="False" Grid.Row="7" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0" Click="RedoBtn_Click">Redo
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Grid.Row="8" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0">Clear
+            <Button x:Name="clearBtn" IsEnabled="False" Grid.Row="8" Width="170" Height="30"  Background="#FCBB6D" FontSize="25" FontFamily="Consolas" Foreground="#475C7A"  BorderThickness="0" Click="ClearBtn_Click">Clear
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5" />

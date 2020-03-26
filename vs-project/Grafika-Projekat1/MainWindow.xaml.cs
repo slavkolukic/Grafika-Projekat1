@@ -24,6 +24,9 @@ namespace Grafika_Projekat1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Stack<Canvas> undoStack = new Stack<Canvas>();
+        private static Stack<Canvas> redoStack = new Stack<Canvas>();
+
         private static bool isFullscreen = false;
         private static string activeShape = "none";
         private static List<Button> buttons = new List<Button>();
@@ -237,7 +240,11 @@ namespace Grafika_Projekat1
                         ellipse = EllipseDesigner;
                         EllipseDesigner = null;
                         ellipse.MouseLeftButtonDown += OnEllipseMouseLeftButtonDown;
+
+                        AddCurrentCanvasToUndo();
+
                         cnvs.Children.Add(ellipse);
+                        clearBtn.IsEnabled = true;
                     }
                     break;
 
@@ -254,7 +261,11 @@ namespace Grafika_Projekat1
                         rectangle = RectangleDesigner;
                         RectangleDesigner = null;
                         rectangle.MouseLeftButtonDown += OnRectangleMouseLeftButtonDown;
+
+                        AddCurrentCanvasToUndo();
+
                         cnvs.Children.Add(rectangle);
+                        clearBtn.IsEnabled = true;
                     }
                     break;
 
@@ -278,7 +289,11 @@ namespace Grafika_Projekat1
                         image = ImageDesigner;
                         ImageDesigner = null;
                         image.MouseLeftButtonDown += OnImageMouseLeftButtonDown;
+
+                        AddCurrentCanvasToUndo();
+
                         cnvs.Children.Add(image);
+                        clearBtn.IsEnabled = true;
                     }
                     break;
             }
@@ -292,7 +307,20 @@ namespace Grafika_Projekat1
             var image = e.OriginalSource;
             ImageDesigner = (Image)image;
             ImageWindow iw = new ImageWindow();
+
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+
             iw.ShowDialog();
+
+            if (ImageDesigner != null)
+            {
+                undoStack.Push(temp);
+                if (undoStack.Count > 0)
+                {
+                    undoBtn.IsEnabled = true;
+                }
+            }
         }
 
         private void OnRectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -303,7 +331,20 @@ namespace Grafika_Projekat1
             var rectangle = e.OriginalSource;
             RectangleDesigner = (Rectangle)rectangle;
             RectangleWindow rw = new RectangleWindow();
+
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+
             rw.ShowDialog();
+
+            if (RectangleDesigner != null)
+            {
+                undoStack.Push(temp);
+                if (undoStack.Count > 0)
+                {
+                    undoBtn.IsEnabled = true;
+                }
+            }
         }
 
         private void OnEllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -314,7 +355,20 @@ namespace Grafika_Projekat1
             var ellipse = e.OriginalSource;
             EllipseDesigner = (Ellipse)ellipse;
             EllipseWindow ew = new EllipseWindow();
+
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+
             ew.ShowDialog();
+
+            if (EllipseDesigner != null)
+            {
+                undoStack.Push(temp);
+                if (undoStack.Count > 0)
+                {
+                    undoBtn.IsEnabled = true;
+                }
+            }
         }
 
         private void Cnvs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -342,9 +396,25 @@ namespace Grafika_Projekat1
                     poly.StrokeThickness = PolygonDesigner.StrokeThickness;
                     PolygonDesigner = null;
                     poly.MouseLeftButtonDown += OnPolygonMouseLeftButtonDown;
+
+                    AddCurrentCanvasToUndo();
+
                     cnvs.Children.Add(poly);
+                    clearBtn.IsEnabled = true;
                 }
                 polyPoints.Clear();
+            }
+        }
+
+        private void AddCurrentCanvasToUndo()
+        {
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+            undoStack.Push(temp);
+
+            if (undoStack.Count > 0)
+            {
+                undoBtn.IsEnabled = true;
             }
         }
 
@@ -356,7 +426,108 @@ namespace Grafika_Projekat1
             var polygon = e.OriginalSource;
             PolygonDesigner = (Polygon)polygon;
             PolygonWindow pw = new PolygonWindow();
+
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+
             pw.ShowDialog();
+
+            if (PolygonDesigner != null)
+            {
+                undoStack.Push(temp);
+                if (undoStack.Count > 0)
+                {
+                    undoBtn.IsEnabled = true;
+                }
+            }
+        }
+
+        private void CopyCanvas(Canvas from, Canvas to)
+        {
+            to.Children.Clear();
+            foreach (UIElement child in from.Children)
+            {
+                var xaml = System.Windows.Markup.XamlWriter.Save(child);
+                UIElement deepCopy = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
+                if ((deepCopy as Ellipse) != null)
+                {
+                    deepCopy.MouseLeftButtonDown += OnEllipseMouseLeftButtonDown;
+                }
+                else if ((deepCopy as Rectangle) != null)
+                {
+                    deepCopy.MouseLeftButtonDown += OnRectangleMouseLeftButtonDown;
+                }
+                else if ((deepCopy as Polygon) != null)
+                {
+                    deepCopy.MouseLeftButtonDown += OnPolygonMouseLeftButtonDown;
+                }
+                else
+                {
+                    deepCopy.MouseLeftButtonDown += OnImageMouseLeftButtonDown;
+                }
+                to.Children.Add(deepCopy);
+            }
+        }
+
+        private void UndoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            polyPoints.Clear();
+
+            if (undoStack.Count > 0)
+            {
+                AddCurrentCanvasToRedo();
+                CopyCanvas(undoStack.Pop(), cnvs);
+
+                if (cnvs.Children.Count <= 0)
+                    clearBtn.IsEnabled = false;
+                else
+                    clearBtn.IsEnabled = true;
+
+                if (undoStack.Count <= 0)
+                    undoBtn.IsEnabled = false;
+            }
+        }
+
+        private void AddCurrentCanvasToRedo()
+        {
+            Canvas temp = new Canvas();
+            CopyCanvas(cnvs, temp);
+            redoStack.Push(temp);
+
+            if (redoStack.Count > 0)
+            {
+                redoBtn.IsEnabled = true;
+            }
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            polyPoints.Clear();
+            AddCurrentCanvasToUndo();
+
+            cnvs.Children.Clear();
+            clearBtn.IsEnabled = false;
+        }
+
+        private void RedoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            polyPoints.Clear();
+
+            if (redoStack.Count > 0)
+            {
+                AddCurrentCanvasToUndo();
+                CopyCanvas(redoStack.Pop(), cnvs);
+
+                if (cnvs.Children.Count <= 0)
+                    clearBtn.IsEnabled = false;
+                else
+                    clearBtn.IsEnabled = true;
+
+                if (redoStack.Count <= 0)
+                    redoBtn.IsEnabled = false;
+                else
+                    redoBtn.IsEnabled = true;
+            }
         }
     }
 }

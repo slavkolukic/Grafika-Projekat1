@@ -61,7 +61,7 @@
             <xctk:ColorPicker BorderBrush="#475C7A" BorderThickness="2" Width="130" Height="40" Grid.Row="2" Grid.Column="2" Name="borderColorPicker">
             </xctk:ColorPicker>
 
-            <TextBox x:Name="borderThicknessTb" FontFamily="Consolas" FontSize="18" BorderBrush="#475C7A" BorderThickness="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="2" Width="130" Height="40" PreviewTextInput="NumberValidationTextBox">
+            <TextBox MaxLength="1" x:Name="borderThicknessTb" FontFamily="Consolas" ToolTip="Unexpected polygon behavior if border is too thick. Max. thickness: 9" FontSize="18" BorderBrush="#475C7A" BorderThickness="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="2" Width="130" Height="40" PreviewTextInput="NumberValidationTextBox">
                 <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="3" />
